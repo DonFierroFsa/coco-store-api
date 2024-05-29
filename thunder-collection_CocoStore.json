@@ -2,7 +2,7 @@
     "clientName": "Thunder Client",
     "collectionName": "CocoStore",
     "collectionId": "c55ccf97-2bc6-478d-9f6c-bddd1459bbe0",
-    "dateExported": "2024-05-29T15:55:49.548Z",
+    "dateExported": "2024-05-29T18:28:51.385Z",
     "version": "1.2",
     "folders": [
         {
@@ -44,11 +44,11 @@
             "method": "POST",
             "sortNum": 10000,
             "created": "2024-05-27T19:06:34.516Z",
-            "modified": "2024-05-29T15:53:27.442Z",
+            "modified": "2024-05-29T16:12:54.553Z",
             "headers": [],
             "body": {
                 "type": "json",
-                "raw": "{\"name\":\"coco2\",\"password\":\"password\"}",
+                "raw": "{\"name\":\"coco2\",\"password\":\"Password1\"}",
                 "form": []
             }
         },
@@ -349,7 +349,24 @@
                 "raw": "{\"name\":\"coco2\",\"newPassword\":\"Password1\"}",
                 "form": []
             }
+        },
+        {
+            "_id": "54436a20-b924-45bf-81db-ac85bbfe072f",
+            "colId": "c55ccf97-2bc6-478d-9f6c-bddd1459bbe0",
+            "containerId": "286bb2a0-dd57-4ca0-8a73-796122452d51",
+            "name": "restarCashRegister",
+            "url": "http://localhost:8080/cashRegister/restar/",
+            "method": "PUT",
+            "sortNum": 230000,
+            "created": "2024-05-29T18:25:22.453Z",
+            "modified": "2024-05-29T18:26:27.768Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\"name\":\"coco2\",\"password\":\"Password1\",\"cashInRegister\":6666}",
+                "form": []
+            }
         }
     ],
-    "ref": "iYBJGbZpqJQq80pOXa5ZaHOfkD-QUf19bRzmwKQ-s7TPkh5j0-QDlqoxIUpvFGlh9zNEL7FraT4qVpA3qCPEAg"
+    "ref": "iYBJGbZpqJQq80pOXa5ZaF7VX7u097eddmaeuSW6krVfznf_6bz5AnWNtigqLC7l0s-_jR1sc0RGGkZsgi6Y7w"
 }
