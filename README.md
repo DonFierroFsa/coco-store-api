@@ -6,7 +6,7 @@ Con express-validator se verifican o validan las entradas/carga de datos, para e
 
 Como funcionalidad extra. se ha añadido la conexion a una API que ofrece datos actualizado del dolar CCL, para poder actulizar los precios de forma autmatica en caso de que el cliente asi lo prefiera.
 
-Datos del admin alojado en MongoDb =>  {"name":"coco2","password":"password"} 
+Datos del admin alojado en MongoDb =>  {"name":"coco2","password":"Password1"} 
 
 En la ruta principal se encuentra un pobre form, donde probar las funcionalidades login/logout
 
