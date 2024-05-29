@@ -11,4 +11,12 @@ router.put("/sell", jwtValidate, validate, controller.sell);
 
 router.put("/cashOut", jwtValidate, [role], validate, controller.cashOut);
 
+router.put(
+  "/restar",
+  jwtValidate,
+  [role],
+  validate,
+  controller.restarCashRegister
+);
+
 module.exports = router;

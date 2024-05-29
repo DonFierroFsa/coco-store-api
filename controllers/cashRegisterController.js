@@ -1,4 +1,6 @@
 const Product = require("../models/Product");
+const bcrypt = require("bcrypt");
+const User = require("../models/User");
 
 const controller = {
   getCash: async (req, res) => {
@@ -48,6 +50,22 @@ const controller = {
     } else {
       res.status(200).json({
         msg: "Operación denegada",
+      });
+    }
+  },
+  restarCashRegister: async (req, res) => {
+    const { name, password, cashInRegister } = req.body;
+    const user = await User.findOne({ name: name });
+    const verification = await bcrypt.compare(password, user.password);
+    if (verification) {
+      req.session.cashRegister = cashInRegister;
+      res.status(200).json({
+        msg: `Caja restablecida luego de arqueo `,
+        cashInRegister: cashInRegister,
+      });
+    } else {
+      res.status(400).json({
+        msg: `Usuario o contraseña erróneos`,
       });
     }
   },
