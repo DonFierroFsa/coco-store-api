@@ -8,3 +8,5 @@ Como funcionalidad extra. se ha añadido la conexion a una API que ofrece datos 
 
 Datos del admin alojado en MongoDb =>  {"name":"coco2","password":"password"} 
 
+En la ruta principal se encuentra un pobre form, donde probar las funcionalidades login/logout
+
