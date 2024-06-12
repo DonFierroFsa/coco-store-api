@@ -10,13 +10,13 @@ const operationRegister = async (req, res, next) => {
       { seller: seller },
       {
         $inc: { cash: Number(operation.cashOperated) },
-        $push: { operations: [operation, { seller: seller }] },
+        $push: { operations: [operation] },
       }
     );
 
     await CashRegister.findByIdAndUpdate(mainCashRegisterID, {
       $inc: { cash: Number(operation.cashOperated) },
-      $push: { operations: [operation, { seller: seller }] },
+      $push: { operations: [operation] },
     });
 
     res.json({ msg: "Operación registrada exitosamente" });
