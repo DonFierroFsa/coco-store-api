@@ -2,7 +2,7 @@
     "clientName": "Thunder Client",
     "collectionName": "CocoStore",
     "collectionId": "c55ccf97-2bc6-478d-9f6c-bddd1459bbe0",
-    "dateExported": "2024-05-29T18:28:51.385Z",
+    "dateExported": "2024-06-12T01:24:05.896Z",
     "version": "1.2",
     "folders": [
         {
@@ -44,11 +44,11 @@
             "method": "POST",
             "sortNum": 10000,
             "created": "2024-05-27T19:06:34.516Z",
-            "modified": "2024-05-29T16:12:54.553Z",
+            "modified": "2024-06-10T17:55:33.137Z",
             "headers": [],
             "body": {
                 "type": "json",
-                "raw": "{\"name\":\"coco2\",\"password\":\"Password1\"}",
+                "raw": "{\"name\":\"coco\",\"password\":\"Pasword1\"}",
                 "form": []
             }
         },
@@ -78,7 +78,7 @@
             "method": "POST",
             "sortNum": 50000,
             "created": "2024-05-27T19:22:43.972Z",
-            "modified": "2024-05-27T22:24:40.760Z",
+            "modified": "2024-06-10T18:00:10.694Z",
             "headers": [
                 {
                     "name": "Cookie",
@@ -88,7 +88,7 @@
             ],
             "body": {
                 "type": "json",
-                "raw": "{\"name\":\"coco2\"}",
+                "raw": "{\"name\":\"coco\"}",
                 "form": []
             }
         },
@@ -130,7 +130,7 @@
             "method": "POST",
             "sortNum": 75000,
             "created": "2024-05-27T18:47:34.459Z",
-            "modified": "2024-05-28T13:04:05.469Z",
+            "modified": "2024-06-10T22:38:03.727Z",
             "headers": [
                 {
                     "name": "Cookie",
@@ -139,7 +139,7 @@
             ],
             "body": {
                 "type": "json",
-                "raw": "{\"name\":\"Adrian\",\"password\":\"passwo1231Ard\",\"cellPhone\":5493704094513,\"role\":\"Admin\"}",
+                "raw": "{\"role\":\n\"Seller\",\n\"password\":\n\"Pasword1\",\n\"cellPhone\":\n5493704194313,\n\"name\":\n\"Adriaan\"}\n",
                 "form": []
             }
         },
@@ -187,11 +187,11 @@
             "colId": "c55ccf97-2bc6-478d-9f6c-bddd1459bbe0",
             "containerId": "1ca058d7-aadf-40c5-9d4e-f2268203b067",
             "name": "deleteUser",
-            "url": "http://localhost:8080/users/deleteUser,Adrian/",
+            "url": "http://localhost:8080/users/deleteUser,adrian/",
             "method": "DELETE",
             "sortNum": 100000,
             "created": "2024-05-28T13:04:26.069Z",
-            "modified": "2024-05-28T13:05:17.538Z",
+            "modified": "2024-06-09T01:09:46.416Z",
             "headers": [
                 {
                     "name": "Cookie",
@@ -257,11 +257,11 @@
             "colId": "c55ccf97-2bc6-478d-9f6c-bddd1459bbe0",
             "containerId": "0cc169d8-e0cb-44c1-9958-346e0270ab90",
             "name": "updateProduct",
-            "url": "http://localhost:8080/stock/updateProduct,CocaCCola",
+            "url": "http://localhost:8080/stock/updateProduct,Sprite",
             "method": "PUT",
             "sortNum": 160000,
             "created": "2024-05-28T15:57:34.980Z",
-            "modified": "2024-05-29T14:50:54.588Z",
+            "modified": "2024-06-10T21:47:26.824Z",
             "headers": [
                 {
                     "name": "Cookie",
@@ -271,7 +271,7 @@
             ],
             "body": {
                 "type": "json",
-                "raw": "{\"name\":\"CocaCCola\",\n  \"cost\": 516,\n  \"price\": 2500,\n  \"quantity\": 12,\n  \"expiresIn\": \"2024-12-18\"}",
+                "raw": "{\"name\":\"Sprite\",\n  \"cost\": 516,\n  \"price\": 2500,\n  \"quantity\": 122,\n  \"expiresIn\": \"2024-12-18\"}",
                 "form": []
             }
         },
@@ -296,11 +296,11 @@
             "method": "PUT",
             "sortNum": 180000,
             "created": "2024-05-29T14:55:51.077Z",
-            "modified": "2024-05-29T15:20:39.706Z",
+            "modified": "2024-06-10T23:22:43.279Z",
             "headers": [],
             "body": {
                 "type": "json",
-                "raw": "{\"name\":\"CocaCCola\",\"quantity\":1}",
+                "raw": "{\"name\":\"Sprite\",\"quantity\":5}",
                 "form": []
             }
         },
@@ -313,8 +313,13 @@
             "method": "GET",
             "sortNum": 190000,
             "created": "2024-05-29T15:12:46.984Z",
-            "modified": "2024-05-29T15:13:01.552Z",
-            "headers": []
+            "modified": "2024-06-10T21:25:12.759Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\"cashRegisterName\":\"coco\"}",
+                "form": []
+            }
         },
         {
             "_id": "5c4467eb-10ef-4c52-a847-4a5f794d41a4",
@@ -325,11 +330,11 @@
             "method": "PUT",
             "sortNum": 200000,
             "created": "2024-05-29T15:26:30.863Z",
-            "modified": "2024-05-29T15:29:08.202Z",
+            "modified": "2024-06-10T23:30:21.843Z",
             "headers": [],
             "body": {
                 "type": "json",
-                "raw": "{\"cashOut\":2500,\"name\":\"coco2\",\"password\":\"password\"}",
+                "raw": "{\"cashOut\":2500,\"name\":\"coco\",\"password\":\"Password1\"}",
                 "form": []
             }
         },
@@ -366,7 +371,31 @@
                 "raw": "{\"name\":\"coco2\",\"password\":\"Password1\",\"cashInRegister\":6666}",
                 "form": []
             }
+        },
+        {
+            "_id": "e2f3a7be-b8fc-4ec8-a182-fcc1db266d1a",
+            "colId": "c55ccf97-2bc6-478d-9f6c-bddd1459bbe0",
+            "containerId": "286bb2a0-dd57-4ca0-8a73-796122452d51",
+            "name": "createMainRegister",
+            "url": "http://localhost:8080/cashRegister/createMainCashRegister",
+            "method": "POST",
+            "sortNum": 240000,
+            "created": "2024-06-08T23:55:12.239Z",
+            "modified": "2024-06-08T23:55:45.148Z",
+            "headers": []
+        },
+        {
+            "_id": "0a03d52b-345e-40c6-be13-6a7d334c8456",
+            "colId": "c55ccf97-2bc6-478d-9f6c-bddd1459bbe0",
+            "containerId": "286bb2a0-dd57-4ca0-8a73-796122452d51",
+            "name": "getAllCashRegister",
+            "url": "http://localhost:8080/cashRegister/allCashRegister",
+            "method": "GET",
+            "sortNum": 250000,
+            "created": "2024-06-09T00:23:27.906Z",
+            "modified": "2024-06-09T00:24:05.901Z",
+            "headers": []
         }
     ],
-    "ref": "iYBJGbZpqJQq80pOXa5ZaF7VX7u097eddmaeuSW6krVfznf_6bz5AnWNtigqLC7l0s-_jR1sc0RGGkZsgi6Y7w"
+    "ref": "iYBJGbZpqJQq80pOXa5ZaG6TndG5DDIbBmR-Ebf4xOImqQ7xCYI0Ti33hWG3PaWa4GX_WfpkVUV3QZ_SbV51Lw"
 }
