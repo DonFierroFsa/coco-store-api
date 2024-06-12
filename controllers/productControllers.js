@@ -53,7 +53,7 @@ const controller = {
     } catch (error) {
       res
         .status(400)
-        .json({ msg: "EL producto no pudo ser creado", error: error.message });
+        .json({ msg: "EL producto no pudo ser cargado", error: error.message });
     }
   },
   updateProduct: async (req, res) => {

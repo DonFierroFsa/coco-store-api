@@ -11,7 +11,7 @@ const jwtValidate = (req, res, next) => {
           error: error.message,
         });
       } else {
-        // res.cookie("payload", decoded, { maxAge: 60 * 1000 });
+        res.cookie("payload", decoded, { maxAge: 60 * 1000 });
         next();
       }
     });

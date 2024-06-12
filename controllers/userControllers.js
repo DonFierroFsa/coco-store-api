@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const CashRegister = require("../models/cashRegister");
 
 const controller = {
   allUser: async (req, res) => {
@@ -44,8 +45,10 @@ const controller = {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const newUser = { ...req.body, password: hashedPassword };
+    const userCashRegister = { seller: req.body.name };
     try {
       await User.create(newUser);
+      await CashRegister.create(userCashRegister);
       res.status(201).json(newUser);
     } catch (error) {
       res
@@ -122,6 +125,7 @@ const controller = {
     const deletedUser = await User.findOne({ name: name });
     try {
       await User.findOneAndDelete({ name: name });
+      await CashRegister.findOneAndDelete({ seller: name });
       res.status(200).json({
         msg: "Usuario eliminado",
         deletedUser: deletedUser,

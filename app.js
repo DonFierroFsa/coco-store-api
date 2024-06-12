@@ -2,8 +2,8 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-const session = require("express-session");
-const MongoDbStore = require("connect-mongodb-session")(session);
+// const session = require("express-session");
+// const MongoDbStore = require("connect-mongodb-session")(session);
 require("dotenv").config();
 
 const dbConnect = require("./db/dbConnect");
@@ -17,10 +17,10 @@ const cashRegisterRouter = require("./routes/cashRegisterRoutes");
 
 const app = express();
 
-const store = new MongoDbStore({
-  uri: process.env.MONGO_URL,
-  collection: "cashRegister",
-});
+// const store = new MongoDbStore({
+//   uri: process.env.MONGO_URL,
+//   collection: "cashRegister",
+// });
 
 //middlewares
 app.use(logger("dev"));
@@ -28,14 +28,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-app.use(
-  session({
-    secret: process.env.SESSION_KEY,
-    resave: true,
-    saveUninitialized: true,
-    store: store,
-  })
-);
+// app.use(
+//   session({
+//     secret: process.env.SESSION_KEY,
+//     resave: true,
+//     saveUninitialized: true,
+//     store: store,
+//   })
+// );
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);

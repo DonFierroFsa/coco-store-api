@@ -16,11 +16,12 @@ const controller = {
         const userPayload = {
           role: user.role,
           isActive: user.isActive,
+          name: user.name,
         };
         const token = jwt.sign(userPayload, process.env.JWT_KEY, {
-          expiresIn: "2h",
+          expiresIn: "8h",
         });
-        res.cookie("token", token, { maxAge: 60 * 1000 * 60 * 24 });
+        res.cookie("token", token, { maxAge: 60 * 1000 * 60 * 8 });
 
         res.status(200).json({
           msg: "Usuario logueado correctamente",
