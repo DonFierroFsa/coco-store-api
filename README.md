@@ -17,4 +17,15 @@ Datos del admin alojado en MongoDb =>
 "name":
 "coco"}
 
+"casinoData": [
+{
+"_id": "67006683a41ea4bc03cc7c5d",
+"bonus": 50,
+"nameCasino": "maxi casino",
+"cashLoadLimit": 5000,
+"createdAt": "2024-10-04T22:04:51.588Z",
+"updatedAt": "2024-10-04T22:04:51.588Z",
+"__v": 0
+}
+]
 En la ruta principal se encuentra un pobre form, donde probar las funcionalidades login/logout

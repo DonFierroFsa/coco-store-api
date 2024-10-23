@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
@@ -14,8 +15,10 @@ const usersRouter = require("./routes/users");
 const productRouter = require("./routes/productRoutes");
 const authRoutes = require("./routes/authRoutes");
 const cashRegisterRouter = require("./routes/cashRegisterRoutes");
+const casinoRouter = require("./routes/casinoRoutes");
 
 const app = express();
+app.use(cors());
 
 // const store = new MongoDbStore({
 //   uri: process.env.MONGO_URL,
@@ -42,5 +45,6 @@ app.use("/users", usersRouter);
 app.use("/auth", authRoutes);
 app.use("/stock", productRouter);
 app.use("/cashRegister", cashRegisterRouter);
+app.use("/casino", casinoRouter);
 
 module.exports = app;

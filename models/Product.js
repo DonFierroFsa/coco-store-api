@@ -6,6 +6,7 @@ const productSchema = new Schema(
       type: String,
       required: true,
       unique: true,
+      lowercase: true,
     },
     cost: {
       type: Number,
@@ -23,6 +24,18 @@ const productSchema = new Schema(
     },
     expiresIn: {
       type: Date,
+    },
+    category: {
+      type: String,
+      required: true,
+      default: "other",
+    },
+    images: {
+      type: Array,
+      required: true,
+    },
+    isInOffer: {
+      type: Boolean,
     },
   },
   { timestamps: true }

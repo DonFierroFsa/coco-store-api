@@ -14,7 +14,7 @@ const {
 const validate = require("../middlewares/validate");
 const jwtValidate = require("../middlewares/jwtValidate");
 
-router.get("/allUsers", jwtValidate, validate, controller.allUser);
+router.post("/allUsers", jwtValidate, validate, controller.allUser);
 
 router.get("/userById,:id", jwtValidate, controller.userById);
 
@@ -29,19 +29,19 @@ router.post(
 );
 
 router.put(
-  "/updatePassword",
+  "/updateUser,:name",
   jwtValidate,
-  [role, newPassword],
+  [name, cellPhone, role, token],
   validate,
-  controller.updatePassword
+  controller.updateUser
 );
 
 router.put(
-  "/updateUser,:name",
+  "/updatePassword",
   jwtValidate,
-  [name, password, cellPhone, role, isActive, token],
+  [newPassword],
   validate,
-  controller.updateUser
+  controller.updatePassword
 );
 
 router.delete(

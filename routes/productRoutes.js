@@ -13,7 +13,9 @@ const validate = require("../middlewares/validate");
 const jwtValidate = require("../middlewares/jwtValidate");
 
 //Routes
-router.get("/table", jwtValidate, controller.table);
+router.get("/table", controller.table);
+
+router.post("/tableStock", jwtValidate, controller.tableStock);
 
 router.get("/productId,:id", jwtValidate, controller.searchById);
 
@@ -24,15 +26,14 @@ router.get("/dolarPrice", controller.dolarPrice);
 router.post(
   "/newProduct",
   jwtValidate,
-  [name, cost, quantity, expiresIn, role],
+  [name, cost, quantity, role],
   validate,
   controller.newProduct
 );
-
 router.put(
   "/updateProduct,:name",
   jwtValidate,
-  [name, cost, quantity, expiresIn, role],
+  [name, cost, quantity, role],
   validate,
   controller.updateProduct
 );

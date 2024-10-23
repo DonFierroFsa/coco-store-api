@@ -1,5 +1,5 @@
-const { body, cookie } = require("express-validator");
-
+const { body } = require("express-validator");
+//body o cookies
 const validators = {
   name: body("name")
     .notEmpty()
@@ -36,11 +36,11 @@ const validators = {
   isActive: body("isActive")
     .isBoolean(false)
     .withMessage("El usuario no esta activo"),
-  role: cookie("token.role")
+  role: body("token.role")
     .isIn(["Admin"])
     .notEmpty()
     .withMessage("No se cuenta con los permisos necesarios"),
-  token: cookie("token").isJWT().withMessage("Token no valido"),
+  token: body("token").isJWT().withMessage("Token no valido"),
 };
 
 module.exports = validators;

@@ -56,10 +56,32 @@ const controller = {
         .json({ msg: "El usuario no pudo ser cargado", error: error.message });
     }
   },
+  updateUser: async (req, res) => {
+    const _id = req.body._id;
+    const updateData = req.body;
+    try {
+      await User.findOneAndUpdate({ _id: _id }, updateData);
+      const updatedUser = await User.findOne({ _id: _id });
+      res.status(200).json({
+        msg: "Usuario actualizado",
+        updateInfo: updateData,
+        user: updatedUser,
+      });
+    } catch (error) {
+      res.status(400).json({
+        msg: `El usuario ${name} no pudo ser actualizado`,
+        error: error.message,
+      });
+    }
+  },
   updatePassword: async (req, res) => {
-    const { name, newPassword } = req.body;
+    const { name, oldPassword, newPassword } = req.body;
     const user = await User.findOne({ name: name });
-    if (user) {
+    const hashedPassword = user.password;
+
+    const verification = await bcrypt.compare(oldPassword, hashedPassword);
+
+    if (verification) {
       const saltRounds = 5;
       const salt = await bcrypt.genSalt(saltRounds);
       const hashedPassword = await bcrypt.hash(newPassword, salt);
@@ -79,25 +101,6 @@ const controller = {
       }
     } else {
       res.status(404).json({ msg: `Usuario : ${name} no encontrado` });
-    }
-  },
-  updateUser: async (req, res) => {
-    const name = req.params.name;
-    const updateData = req.body;
-    try {
-      await User.findOneAndUpdate({ name: name }, updateData);
-      const updatedUser = await User.findOne({ name: name });
-      req.body = updatedUser;
-      res.status(200).json({
-        msg: "Usuario actualizado",
-        updateInfo: updateData,
-        user: updatedUser,
-      });
-    } catch (error) {
-      res.status(400).json({
-        msg: `El usuario ${name} no pudo ser actualizado`,
-        error: error.message,
-      });
     }
   },
   up_downUser: async (req, res) => {
@@ -127,7 +130,7 @@ const controller = {
       await User.findOneAndDelete({ name: name });
       await CashRegister.findOneAndDelete({ seller: name });
       res.status(200).json({
-        msg: "Usuario eliminado",
+        msg: `El usuario ${name}  fue eliminado`,
         deletedUser: deletedUser,
       });
     } catch (error) {

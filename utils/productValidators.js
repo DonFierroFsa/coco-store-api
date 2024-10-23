@@ -19,7 +19,7 @@ const validators = {
     .withMessage("Debes ingresar la fecha de vencimiento")
     .isDate()
     .withMessage("La fecha debe estar en un formato valido"),
-  role: cookie("token.role")
+  role: body("token.role")
     .isIn(["Admin"])
     .notEmpty()
     .withMessage("No se cuenta con los permisos necesarios"),

@@ -12,7 +12,7 @@ const controller = {
 
       const verification = await bcrypt.compare(password, hashedPassword);
 
-      if (verification && user.isActive && !user.isOnline) {
+      if (verification && user.isActive) {
         const userPayload = {
           role: user.role,
           isActive: user.isActive,

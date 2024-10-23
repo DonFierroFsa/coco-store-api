@@ -6,7 +6,7 @@ const { role } = require("../utils/userValidators");
 const validate = require("../middlewares/validate");
 const operationRegister = require("../middlewares/OperationRegister");
 
-router.get("/allCashRegister", jwtValidate, controller.allCashRegister);
+router.post("/allCashRegister", jwtValidate, controller.allCashRegister);
 
 router.post(
   "/createMainCashRegister",

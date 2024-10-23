@@ -21,16 +21,14 @@ const userSchema = new Schema(
       type: String,
       required: true,
       enum: ["Admin", "Seller"],
-      default: "Admin",
+      default: "Seller",
     },
     isActive: {
       type: Boolean,
-      required: true,
       default: true,
     },
     isOnline: {
       type: Boolean,
-      required: true,
       default: false,
     },
   },

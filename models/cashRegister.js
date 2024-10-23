@@ -17,16 +17,20 @@ const cashRegisterSchema = new Schema({
         type: String,
         required: true,
       },
-      productOperated: {
-        type: String,
+      details: {
+        type: Array,
         required: true,
       },
-      quantityOperated: {
+      // productOperated: {
+      //   type: String,
+      //   required: true,
+      // },
+      // quantityOperated: {
+      //   type: Number,
+      //   required: true,
+      // },
+      totalCashOperated: {
         type: Number,
-        required: true,
-      },
-      cashOperated: {
-        type: String,
         required: true,
       },
       seller: {

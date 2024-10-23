@@ -1,6 +1,4 @@
 const Product = require("../models/Product");
-const bcrypt = require("bcrypt");
-const User = require("../models/User");
 const CashRegister = require("../models/cashRegister");
 
 const controller = {
@@ -24,7 +22,7 @@ const controller = {
     };
     try {
       await CashRegister.create(mainCashRegister);
-      res.status(201).json({ msg: "Caja principal creada con exito" });
+      res.status(201).json({ msg: "Caja principal creada con éxito" });
     } catch (error) {
       res
         .status(400)
@@ -51,92 +49,120 @@ const controller = {
         .json({ error: `No se pudo cargar la caja ${cashRegisterName}` });
   },
   sell: async (req, res, next) => {
-    const { name, quantity } = req.body;
-    const payload = req.cookies.payload;
-    const sellerName = payload.name;
+    const { operationState, seller } = req.body;
+    // const payload = req.cookies.payload;
+    // const sellerName = payload.name;
 
-    const product = await Product.findOne({ name: name });
+    const details = [];
 
-    if (product) {
-      const updatedStock = product.quantity - quantity;
+    if (operationState.length > 0) {
+      await Promise.all(
+        operationState.map(async (item) => {
+          const productName = item.name;
+          const quantity = item.quantity;
 
-      if (updatedStock >= 0) {
-        const updateCash = product.price * quantity;
-        req.body = {
-          operation: {
-            operation: "sell",
-            productOperated: product.name,
-            quantityOperated: quantity,
-            cashOperated: updateCash,
-            seller: sellerName,
-          },
-        };
+          const product = await Product.findOne({ name: productName });
 
-        // req.session.cashRegister = req.session.cashRegister + updateCash;
+          if (product) {
+            const updatedStock = product.quantity - quantity;
+            if (updatedStock >= 0) {
+              const cashOperated = product.price * quantity;
 
-        await Product.findByIdAndUpdate(
-          { _id: product.id },
-          { quantity: updatedStock }
-        );
+              details.push({
+                productOperated: product.name,
+                quantityOperated: quantity,
+                cashOperated: cashOperated,
+              }); // req.session.cashRegister = req.session.cashRegister + updateCash;
 
-        next();
-      } else {
-        res.status(400).json({ msg: "El stock es insuficiente" });
-      }
+              await Product.findByIdAndUpdate(
+                { _id: product.id },
+                { quantity: updatedStock }
+              );
+            } else {
+              next();
+            }
+          } else {
+            next();
+          }
+        })
+      );
+      const numOfOperations = details.length;
+      const totalCashOperated = details.reduce(
+        (acc, operation) => acc + operation.cashOperated,
+        0
+      );
+      req.body = {
+        operations: {
+          operation: "sell",
+          seller,
+          numOfOperations,
+          details,
+          totalCashOperated,
+        },
+      };
+      next();
     } else {
       res.status(400).json({
-        msg: "la venta no pudo cargarse, el producto no fue encontrado",
+        msg: "La venta no puedo cargarse",
       });
     }
   },
-  cashOut: async (req, res) => {
-    const cashOut = req.body.cashOut;
+  cashOut: async (req, res, next) => {
     const mainCashRegister = await CashRegister.findOne({ seller: "MAIN" });
     const cashInRegister = mainCashRegister.cash;
 
-    if (cashOut < cashInRegister) {
-      const payload = req.cookies.payload;
-      const sellerName = payload.name;
+    const { seller, cashOut } = req.body;
+
+    if (cashOut <= cashInRegister) {
+      const details = [
+        {
+          productOperated: "cashOut",
+          cashOperated: cashOut,
+        },
+      ];
+      const numOfOperations = details.length;
 
       req.body = {
-        operation: {
+        operations: {
           operation: "cashOut",
-          cashOperated: cashOut,
-          seller: sellerName,
+          totalCashOperated: cashOut,
+          seller: seller,
+          details,
+          numOfOperations,
         },
       };
-      // req.session.cashRegister = req.session.cashRegister - cashOut;
-      await CashRegister.findOneAndUpdate(
-        { seller: "MAIN" },
-        { $inc: { cash: -cashOut } }
-      );
-      res.status(200).json({
-        msg: `Fue retirado ${cashOut} de la caja`,
-        // cashInRegister: req.session.cashRegister,
-        cashInRegister: mainCashRegister,
-      });
+      // console.log(cashOut);
+      // // req.session.cashRegister = req.session.cashRegister - cashOut;
+      // const register = await CashRegister.findOneAndUpdate(
+      //   { seller: "MAIN" },
+      //   { $inc: { cash: cashOut } }
+      // );
+      // res.status(200).json({
+      //   msg: `Fue retirado ${cashOut} de la caja`,
+      //   // cashInRegister: req.session.cashRegister,
+      //   cashInRegister: mainCashRegister,
+      // });
+      next();
     } else {
-      res.status(400).json({
+      res.status(401).json({
         msg: "Operación denegada",
       });
     }
   },
   restarCashRegister: async (req, res) => {
-    const { name, password, cashInRegister } = req.body;
-    const user = await User.findOne({ name: name });
-    const verification = await bcrypt.compare(password, user.password);
+    const { registerCashOwner, cashInRegister } = req.body;
 
-    if (verification) {
+    try {
       // req.session.cashRegister = cashInRegister;
       await CashRegister.findOneAndUpdate(
-        { seller: "MAIN" },
-        { cash: cashInRegister }
+        { seller: registerCashOwner },
+        { cash: cashInRegister, operations: [] }
       );
       res.status(200).json({
-        msg: `Caja restablecida luego de arqueo `,
+        msg: `Caja ${registerCashOwner} restablecida en $${cashInRegister} `,
         cashInRegister: cashInRegister,
       });
-    } else {
+    } catch {
       res.status(400).json({
         msg: `Usuario o contraseña erróneos`,
       });
